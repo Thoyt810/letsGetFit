@@ -16,8 +16,6 @@ app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/", { useNewUrlParser: true });
 
-
-
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
 });
