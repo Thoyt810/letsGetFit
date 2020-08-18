@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 3000;
 
-const { Exercise } = require("./models");
+const { Workout } = require("./models");
 const app = express();
 
 app.use(logger("dev"));
@@ -14,10 +14,17 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+  useNewUrlParser: true,
+});
 
-
+app.get("/api/workouts", (req, res) => {
+  Workout.find().then((results) => {
+    console.log(results);
+    res.json(results);
+  });
+});
 
 app.listen(PORT, () => {
-    console.log(`App running on port ${PORT}!`);
+  console.log(`App running on port ${PORT}!`);
 });
