@@ -18,6 +18,10 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
 });
 
+app.get("/stats", (req, res) => {
+  res.sendFile(__dirname, "/public/stats.html");
+});
+
 app.get("/api/workouts", (req, res) => {
   Workout.find().then((results) => {
     console.log(results);
